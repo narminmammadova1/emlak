@@ -317,8 +317,7 @@ const Header = () => {
         <label htmlFor="">Bakı şəhəri Sabunçu rayonu</label>  </div>
         <div className='flex gap-1'>  <input type="checkbox" />
         <label htmlFor="">Bakı şəhəri Suraxanı rayonu</label>  </div>
-        <div className='flex gap-1'>  <input type="checkbox" />
-        <label htmlFor="">Bakı şəhəri Suraxanı rayonu</label>  </div>
+       
         
       
     </div>
