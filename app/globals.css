@@ -26,3 +26,15 @@ body {
 
   font-size: 12px;
 }
+button{
+  cursor: pointer;
+}
+button:hover{
+  background-color: rgb(173, 170, 170);
+  scale: 1.05;
+}
+
+.hover-green:hover {
+  color: rgb(10, 90, 10);
+  cursor: pointer;
+}

@@ -1,5 +1,7 @@
+'use client'
+
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { FcSearch } from "react-icons/fc";
 import { FaFile } from "react-icons/fa";
 import { BiPlusMedical } from "react-icons/bi";
@@ -12,108 +14,145 @@ import { BsDatabase } from "react-icons/bs";
 import { RiInformationFill } from "react-icons/ri";
 import { SlSettings } from "react-icons/sl";
 import { GoTriangleUp } from "react-icons/go";
+import { GoTriangleDown } from "react-icons/go";
 
 import { LuFilePenLine } from "react-icons/lu";
+import useDropDown from '@/app/Hooks/useDropDown';
 
 
 const Header = () => {
-  return (
-    <header className='flex flex-col bg-gray-200 '>
 
-<div>    <div className='flex p-4'>
- <div className='flex gap-2 px-2'>
+  const [showPanel,setShowPanel]=useState(true)
+
+const doubleClick=()=>{
+setShowPanel((prew)=>!prew)
+}
+
+
+const {openDropDown,isOpenDropDown}= useDropDown()
+
+  return (
+    <header className='flex flex-col bg-gray-200 w-screen min-w-full '>
+
+<section>    <div className='flex p-4'>
+ <button  onClick={openDropDown}  className='flex gap-2 px-2 '>
         <div className='text-center flex flex-col items-center'>
 <FcSearch  color=' white' size={24}/>
 <p>Axtarış</p>
         </div>
-        <div><select name="" id=""></select></div>
-      </div>
-      <div className='flex gap-2 px-2'>
+        <div><GoTriangleDown size={22} /></div>
+      </button>
+      <button className='flex gap-2 px-2 relative'>
         <div  className='text-center flex flex-col items-center'>
 <FcSearch  size={24} />
 <p>Geniş axtarış</p>
         </div>
+      </button>
+      <div className= {isOpenDropDown ?  ' bg-white px-4   py-2 absolute top-16': 'hidden'} >
+<ul className=' flex flex-col gap-2   '>
+  <li  className='hover-green'>Standart axtarış</li>
+  <li className='border-b-1 border-gray-400 hover-green '>Suretli axtaris panelini goster</li>
+  <li  className='hover-green'>Kecid uzre axtaris(emlak bazasi serverinde,18 mln elan arasinda axtaris)</li>
+  <li className='border-b-1 border-gray-400 hover-green '>Acar soz uzre etrafli axtaris</li>
+  <li className='hover-green'>Telefon nomresi uzre axtaris</li>
+  <li className='border-b-1 border-gray-400 hover-green '>Huquq sahibi uzre axtaris</li>
+  <li className='hover-green'>Elaqeli sexs uzre axtaris</li>
+  <li className='border-b-1 border-gray-400 hover-green '>Sheher uzre axtaris</li>
+  <li className='hover-green'>Nishangah uzre axtaris</li>
+  <li className='border-b-1 border-gray-400 hover-green '>Email uzre axtaris</li>
+  <li className='hover-green'>Skype unvani uzre axtaris</li>
+  <li className='border-b-1 border-gray-400 hover-green '>Secilen istifadecinin mesul oldugu emlaklar</li>
+  <li className='hover-green'>Secilen istifadecinin baresinde melumat verdiyi emlaklar</li>
+  <li className='border-b-1 border-gray-400 hover-green '>MTK uzre axtaris</li>
+  <li className='hover-green'>Internetden oxunan(tesdiq edilmeyenler)</li>
+</ul>
+
       </div>
 
-        <div className='flex border-x-1 border-gray-400'>
+        <button className='flex border-x-1 border-gray-400'>
         <div  className='text-center flex flex-col items-center px-2'>
 <FaFile className=" text-blue-300" size={24} />
 <p>Baxış</p>
         </div>
-        <div><select name="" id=""></select></div>
-      </div>
+        <div>        <div><GoTriangleDown size={22} /></div>
+</div>
+      </button>
 
-          <div className='flex  border-gray-400 gap-2 px-2'>
+          <button className='flex  border-gray-400 gap-2 px-2'>
         <div  className='text-center flex flex-col items-center '>
 <BiPlusMedical className=" text-blue-300" size={24}/>
 
 <p>Əlavə et</p>
         </div>
-        <div><select name="" id=""></select></div>
-      </div>
-          <div className='flex border-gray-400'>
+        <div>        <div><GoTriangleDown size={22} /></div>
+</div>
+      </button>
+          <button className='flex border-gray-400'>
         <div  className='text-center flex flex-col items-center'>
 <LuFilePenLine  className=" text-gray-500" size={24}/>
 
 <p>Redakte et</p>
         </div>
-        <div><select name="" id=""></select></div>
-      </div>
-          <div className='flex border-r-1 border-gray-400'>
+        <div>        <div><GoTriangleDown size={22} /></div>
+</div>
+      </button>
+          <button className='flex border-r-1 border-gray-400'>
         <div  className='text-center flex flex-col items-center px-2'>
 <FaMinus className=" text-blue-300" size={24}/>
 
 <p>Sil</p>
         </div>
-      </div>
+      </button>
 
 <div className='flex border-r-1 border-gray-400 gap-2 px-2'>
-      <div className='flex  '>
+      <button className='flex '>
         <div  className='text-center flex flex-col items-center'>
 <IoEarth  className=" text-blue-300" size={24}/>
 
-<p>Elanlari oxu</p>
+<p className=' text-red-500'>Elanlari oxu</p>
         </div>
-        <div><select name="" id=""></select></div>
-      </div>
+        <div>        <div><GoTriangleDown size={22} color='red' /></div>
+</div>
+      </button>
 
 
             <div className='flex '>
-        <div  className='text-center flex flex-col items-center'>
+        <button  className='text-center flex flex-col items-center'>
             <div className=' bg-blue-300  rounded-full w-6 h-6 flex  justify-center items-center'>
                 <IoCall color='white' />
 </div>
 
 <p>Sifarishler</p>
-        </div>
+        </button>
       </div>
 
 
             <div className='flex  gap-2 px-2'>
-        <div className='text-center flex flex-col items-center'>
+        <button className='text-center flex flex-col items-center'>
 <FaMagento  className=" text-blue-300" size={24}/>
 
 <p>Agentler</p>
-        </div>
+        </button>
       </div>
 
 </div>
 
 <div className='flex border-r-1 border-gray-400' >
 
-              <div className='flex gap-2 px-2'>
+              <button className='flex gap-2 px-2'>
         <div  className='text-center flex flex-col items-center'>
 <IoStar  className=" text-blue-300" size={24}/>
 
 <p>Əlavələr</p>
         </div>
-        <div><select name="" id=""></select></div>
-      </div>
+        <div>        <div><GoTriangleDown size={22} /></div>
+</div>
+      </button>
 
 
 </div>
 
-<div className='flex border-r-1 border-gray-400' >
+<button className='flex border-r-1 border-gray-400' >
 
               <div className='flex gap-2 px-2 '>
         <div  className='text-center flex flex-col items-center'>
@@ -121,15 +160,16 @@ const Header = () => {
 
 <p>Hesabatlar</p>
         </div>
-        <div><select name="" id=""></select></div>
+        <div>        <div><GoTriangleDown size={22} /></div>
+</div>
       </div>
 
       
 
 
-</div>
+</button>
 
-<div className='flex border-r-1 border-gray-400' >
+<button className='flex border-r-1 border-gray-400' >
 
               <div className='flex  gap-2 px-2'>
         <div  className='text-center flex flex-col items-center'>
@@ -137,15 +177,16 @@ const Header = () => {
 
 <p>İdarəetmə</p>
         </div>
-        <div><select name="" id=""></select></div>
+        <div>        <div><GoTriangleDown size={22} /></div>
+</div>
       </div>
 
       
 
 
-</div>
+</button>
 
-<div className='flex border-r-1 border-gray-400' >
+<button className='flex border-r-1 border-gray-400' >
 
               <div className='flex gap-2 px-2 '>
         <div  className='text-center flex flex-col items-center'>
@@ -153,30 +194,38 @@ const Header = () => {
 
 <p>Haqqında</p>
         </div>
-        <div><select name="" id=""></select></div>
+        <div>        <div><GoTriangleDown size={22} /></div>
+</div>
       </div>
 
       
 
 
-</div>
+</button>
 
 
         </div>
 
-        <div className=' flex items-center gap-4'>
-            <GoTriangleUp />
-            <div className=' flex gap-1'><p className=' text-blue-400'>sürətli axtaris panelini gizlət</p>
+        <div  className='flex gap-4'>
+          <div  onClick={doubleClick} className=' flex items-center gap-4'> 
+          {showPanel ? <GoTriangleDown size={18} />
+: <GoTriangleUp size={18} /> 
+ } 
+          <p className='  cursor-pointer text-blue-400'>{showPanel ? "sürətli axtaris panelini gizlət" :'sürətli axtaris panelini ac' }</p>
+</div>
+            <div className=' flex gap-1'>
+
 <p className=' text-pink-500'>axtarışı yenilə</p>
 </div>
 
 
-        </div></div>
+        </div>
+        </section>
 
-     <div className=' header-bottom flex my-2 px-4'>  
+     <section  className={showPanel ? '  visible  flex my-2 px-4' :"hidden "}>  
 
 <div> 
-    <div className=' flex bg-amber-600 gap-2 mb-6 '>
+    <div className=' flex gap-2 mb-6 '>
 
          <input type="checkbox" 
     name='Satis'
@@ -201,7 +250,7 @@ const Header = () => {
     </div>
 
 
-<div className=' flex   bg-green-400 justify-between my-2 me-2 '>
+<div className=' flex  justify-between my-2 me-2 '>
     <div>   <label htmlFor="">    <input  type="checkbox" /> Qiymet
 </label></div>
   
@@ -209,7 +258,7 @@ const Header = () => {
 
 
 
-<div className='flex bg-cyan-700 '><input type="number" placeholder='0' className='w-[50px] bg-white' />
+<div className='flex  '><input type="number" placeholder='0' className='w-[50px] bg-white' />
         <div><select name="" id=""></select></div></div>
 <div className='px-2'> <p>-</p></div>
         
@@ -217,22 +266,22 @@ const Header = () => {
 
 
 
-<div className=' flex bg-yellow-400 '> <input type="number" placeholder='10000000' className='w-[50px] bg-white' />
+<div className=' flex '> <input type="number" placeholder='10000000' className='w-[50px] bg-white' />
         <div><select name="" id=""></select></div></div>
 
 </div>
 
-<div className=' flex  justify-between bg-emerald-900 '>
+<div className=' flex  justify-between '>
     <label htmlFor="">    <input type="checkbox" /> Sahe
 </label>
 
 <div className=' flex'>
     
-     <div className='flex bg-red-400'><input type="number" placeholder='0' className='w-[50px] bg-white' />
+     <div className='flex'><input type="number" placeholder='0' className='w-[50px] bg-white' />
         <div><select name="" id=""></select></div></div>
 
 <div className='px-2'> <p>-</p></div>
-<div className=' flex   bg-emerald-600 me-2 '>
+<div className=' flex  me-2 '>
     <input type="number" placeholder='500' className='w-[50px] bg-white' />
         <div><select name="" id=""></select></div></div></div>
 
@@ -243,7 +292,7 @@ const Header = () => {
 </div>
 
 
-<div className=' flex bg-amber-200 gap-3 px-2'>
+<div className=' flex gap-3 px-2'>
 <div>
     <h1>Mənzillər(Yeni tikili)</h1>
     <ul>
@@ -324,7 +373,7 @@ const Header = () => {
     </div>
     
 </div>
-     </div>
+     </section>
      
     </header>
   )
