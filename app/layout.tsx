@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./Components/Header/page";
 import Footer from "./Components/Footer/page";
+import { ReactNode } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +19,15 @@ export const metadata = {
   description: "emlak bazasi",
 };
 
-export default function RootLayout({ children }) {
+interface RootLayoutProps{
+
+  children:ReactNode;
+}
+
+
+
+
+export default function RootLayout({ children }:RootLayoutProps) {
   return (
     <html lang="en">
       <body
