@@ -18,7 +18,11 @@ const [hasMore,setHasMore]=useState(true)
       setLoading(true);
       const res = await fetch(`https://e-baza.az/api/lproperty/filter?page=${pageNumber}&pagesize=200`);
       const json = await res.json();
+            console.log("json",json);
+
       return json;
+
+      
     } catch (error) {
       console.error("Xəta:", error);
       return [];
