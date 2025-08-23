@@ -13,23 +13,43 @@ const [hasMore,setHasMore]=useState(true)
 
 //elanlarin API-den cekilmesi
 
- const fetchDataFromAPI = async (pageNumber: number) => {
-    try {
-      setLoading(true);
-      const res = await fetch(`https://e-baza.az/api/lproperty/filter?page=${pageNumber}&pagesize=200`);
-      const json = await res.json();
-            console.log("json",json);
+//  const fetchDataFromAPI = async (pageNumber: number) => {
+//     try {
+//       setLoading(true);
+//       const res = await fetch(`https://e-baza.az/api/lproperty/filter?page=${pageNumber}&pagesize=200`);
+//       const json = await res.json();
+//             console.log("json",json);
 
-      return json;
+//       return json;
 
       
-    } catch (error) {
-      console.error("Xəta:", error);
-      return [];
-    } finally {
-      setLoading(false);
-    }
-  };
+//     } catch (error) {
+//       console.error("Xəta:", error);
+//       return [];
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+
+const fetchDataFromAPI = async (pageNumber: number) => {
+  try {
+    setLoading(true);
+    const res = await fetch(`/api/test-fetch`);
+    const json = await res.json();
+    console.log("json", json);
+    return json;
+  } catch (error) {
+    console.error("Xəta:", error);
+    return [];
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
+
 
   //  2. Gələn datanı mövcud state-ə əlavə edən funksiya
   const appendData = (newData: any[]) => {
