@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import { FcSearch } from "react-icons/fc";
 import { FaFile } from "react-icons/fa";
@@ -18,21 +17,23 @@ import { GoTriangleDown } from "react-icons/go";
 
 import { LuFilePenLine } from "react-icons/lu";
 import useDropDown from '@/app/Hooks/useDropDown';
+import Modal from '../Modal/Modal';
+import ModalSearch from '@/app/ModalSearch/ModalSearch';
+import useAppContext from '@/context/useAppContext';
 
 
 
 const Header = () => {
 
-  const [showPanel,setShowPanel]=useState(true)
-
+const [showPanel,setShowPanel]=useState(true)
+const {openDropDown,isOpenDropDown}= useDropDown()
+  const { isOpenSearchModal,toggleSearchModal } = useAppContext();
+const dropdownRef=useRef<HTMLDivElement>(null)
 const doubleClick=()=>{
 setShowPanel((prew)=>!prew)
 }
 
 
-const {openDropDown,isOpenDropDown}= useDropDown()
-
-const dropdownRef=useRef<HTMLDivElement>(null)
 
 useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
@@ -46,13 +47,23 @@ useEffect(() => {
 }, [isOpenDropDown]);
 
 
+useEffect(() => {
+  if (isOpenSearchModal) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
 
+  return () => {
+    document.body.style.overflow = '';
+  };
+}, [isOpenSearchModal]);
 
 
   return (
     <header className='flex flex-col w-screen min-w-full '>
 
-<section>    <div className='flex p-4'>
+<section className=' relative'>    <div className='flex p-4'>
  <button  onClick={openDropDown}  className='flex gap-2 px-2 '>
         <div className='text-center flex flex-col items-center'>
 <FcSearch   size={24}/>
@@ -60,7 +71,7 @@ useEffect(() => {
         </div>
         <div><GoTriangleDown size={22}  color='white' /></div>
       </button>
-      <button className='flex gap-2 px-2 relative'>
+      <button onClick={toggleSearchModal} className='flex gap-2 px-2 relative'>
         <div  className='text-center flex flex-col items-center'>
 <FcSearch  size={24} />
 <p>Geniş axtarış</p>
@@ -348,7 +359,7 @@ useEffect(() => {
 <div className='px-4'>
     <div className='flex mb-1 gap-1'> <label htmlFor="">Metrolar:</label>
     <input type="text" className=' bg-white' /></div>
-    <div className=' flex flex-col max-h-[110px]  bg-white '>
+    <div className=' flex flex-col max-h-[110px] overflow-y-auto bg-white '>
         <div className='flex gap-1'> <input type="checkbox" />
         <label htmlFor="">20 Yanvar</label></div>
        <div className='flex gap-1'> <input type="checkbox" />
@@ -391,7 +402,14 @@ useEffect(() => {
     
 </div>
      </section>
-     
+
+
+{isOpenSearchModal && (
+<Modal>
+<ModalSearch/>
+</Modal>
+)}
+
     </header>
   )
 }

@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./Components/Header/page";
 import Footer from "./Components/Footer/page";
 import { ReactNode } from "react";
+import { AppProvider } from "@/context/AppContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,15 +34,13 @@ export default function RootLayout({ children }:RootLayoutProps) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-<div className="w-[2000px]">         <Header/>
-</div>
-       <main className="flex max-h-screen">
+<AppProvider> <main className="flex max-h-screen">
           {children}
-        </main>
+        </main></AppProvider>
+      
 
         
-        <div className=" w-[2000px] fixed bottom-0">        <Footer/>
-</div>
+       
       </body>
     </html>
   );

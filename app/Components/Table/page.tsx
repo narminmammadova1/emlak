@@ -68,7 +68,15 @@ const fetchDataFromAPI = async (pageNumber: number) => {
     return () => window.removeEventListener("scroll", handleScrollEvent);
   }, [page, loading, hasMore]);
 
-  if (data.length === 0 && loading) return <div>Yüklənir...</div>;
+  if (data.length === 0 && loading){
+ return (
+    <div className="fixed inset-0 flex justify-center items-center bg-opacity-70 z-50">
+      <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  )
+  }
+    
+
 
 
   
@@ -148,11 +156,11 @@ const fetchDataFromAPI = async (pageNumber: number) => {
   <td className="border border-gray-300">{item.region }</td>
   <td className="border border-gray-300">{item.metro }</td>
   <td className="border border-gray-300">{item.target }</td>
-  <td className="border border-gray-300 whitespace-pre-wrap relative group cursor-pointer">
+  <td className="border border-gray-300 whitespace-pre-wrap  relative  group cursor-pointer">
   <div className="limited-text">
     {item.address}
   </div>
-  <div className="absolute  left-0 z-50  top-4 w-full p-2 bg-white border border-gray-400 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-200 group-hover:opacity-100">
+  <div className="absolute  left-0 z-20  top-4 w-full p-2 bg-white border border-gray-400 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-200 group-hover:opacity-100">
     {item.address}
   </div>
 </td>
@@ -166,13 +174,14 @@ const fetchDataFromAPI = async (pageNumber: number) => {
   <td className="border border-gray-300">{item.document }</td>
   <td className="border border-gray-300">{item.repair }</td>
   <td className="border border-gray-300">{item.code}</td>
-<td className="border border-gray-300 whitespace-pre-wrap relative group cursor-pointer">
-  <div className="limited-text">
+<td className="border border-gray-300 whitespace-pre-wrap  group cursor-pointer">
+  <div className='relative'>   <div className="limited-text ">
     {item.data}
   </div>
-  <div className="absolute  left-0 z-50  top-4 w-full p-2 bg-white border border-gray-400 rounded shadow-lg opacity-0 pointer-events-auto transition-opacity duration-200 group-hover:opacity-100">
+  <div className="absolute  left-0 z-10  top-4 w-full p-2 bg-white border border-gray-400 rounded shadow-lg opacity-0 pointer-events-auto transition-opacity duration-200 group-hover:opacity-100">
     {item.data}
-  </div>
+  </div></div>
+
 </td>
   <td className="border border-gray-300">{item.source }</td>
   <td className="border border-gray-300">{item.fkIdResponsibleUser }</td>
