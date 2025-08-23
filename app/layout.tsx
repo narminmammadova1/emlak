@@ -22,14 +22,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
 <div className="w-[2000px]">         <Header/>
 </div>
-        {children}
+       <main className="flex max-h-screen w-[2000px]">
+          {children}
+        </main>
 
         
-        <div className=" absolute bottom-0 w-[2000px] ">        <Footer/>
+        <div className=" w-[2000px] ">        <Footer/>
 </div>
       </body>
     </html>

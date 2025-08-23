@@ -16,7 +16,7 @@ const Footer = () => {
         <div className='flex gap-1 items-center'>
           <label htmlFor="">Say:</label>
           <input type="number" className='  bg-yellow-200 w-[50px] h-[20px]' />
-          <label htmlFor="">Acar soz:</label>
+          <label htmlFor="">Açar soz:</label>
           <input type="text" className=' bg-white border-1 border-black h-[20px] w-[100px]' />
           <button className='flex gap-1 items-center'>   <FaSearch className=" text-blue-400"  />Axtar</button>
        
@@ -26,53 +26,53 @@ const Footer = () => {
         <div className='flex border-x-1 px-1 border-gray-400'>
           <button className='flex gap-1 items-center'>
                    <TbRefresh  className=" text-blue-400" />
-Melumati yenile
+Melumatı yenilə
           </button>
         </div>
            <div className='border-r-1 px-1 border-gray-400' >
           <button className='flex gap-1 items-center'>
 <FaClockRotateLeft  className=" text-blue-400"/>
-Xatirlatmada olan
+Xatırlatmada olan
           </button>
         </div>
 
             <div className='border-r-1 px-1 border-gray-400'>
           <button className=' flex gap-1 items-center'>
 <ImUser className=" text-blue-400" />
-Daxil etdiklerim
+Daxil etdiklərim
           </button>
         </div>
 
             <div className='border-r-1 px-1 border-gray-400'>
           <button className='flex gap-1 items-center'>
 <FaList className=" text-blue-400" />
-Ferqlendirilenler
+Fərqləndirilənlər
           </button>
         </div>
 
            <div className='border-r-1 px-1 border-gray-400'>
           <button className='flex gap-1 items-center'>
 <FaTriangleExclamation className=" text-red-500" />
-Vasitecidir
+Vasitəçidir
           </button>
         </div>
 
             <div className='border-r-1 px-1 border-gray-400'>
           <button className='flex'>
 <BsLink className=" text-blue-400" size={20}/>
-Elaqeli emlaklar
+Əlaqəli əmlaklar
           </button>
         </div>
 
          <div className='border-r-1 px-1 border-gray-400'>
           <button className='flex gap-1 items-center'>
 <FaMinusCircle  className=" text-blue-400"/>
-Bugun daxil edilenler
+Bugün daxil edilenlər
           </button>
         </div>
 
         <div>
-          <label>Diger</label>
+          <label>Digər</label>
           <select name="" id=""></select>
         </div>
       </section>
@@ -80,7 +80,7 @@ Bugun daxil edilenler
       <section className=' footer-bottom flex gap-1'>
 
 <div className=' border-r-1 px-2 border-gray-400'>
-  <p>Istifadeci:</p>
+  <p>İstifadəçi:</p>
 </div>
 <div className='px-16'>
   <p>Adminstrator</p>
@@ -105,12 +105,12 @@ Bugun daxil edilenler
   <p>INS</p>
 </div>
 <div className=' border-r-1 border-gray-400 px-1'>
-  <button className=' text-green-500'>Onlayn destek</button>
+  <button className=' text-green-500'>Online dəstək</button>
 </div>
 <div className='w-[100px] border-r-1 border-gray-400'></div>
 <div>
 
-  <p className='  text-pink-600'>Komputerinizin yaddasini yuklemmesi ucun kohne elanlarin sekillerini silin...</p>
+  <p className='  text-pink-600'>Komputerinizin yaddaşını yükləməməsi üçün köhnə elanlarin şəkillərini silin...</p>
 </div>
 
       </section>

@@ -20,6 +20,7 @@ import { LuFilePenLine } from "react-icons/lu";
 import useDropDown from '@/app/Hooks/useDropDown';
 
 
+
 const Header = () => {
 
   const [showPanel,setShowPanel]=useState(true)
@@ -32,15 +33,15 @@ setShowPanel((prew)=>!prew)
 const {openDropDown,isOpenDropDown}= useDropDown()
 
   return (
-    <header className='flex flex-col bg-gray-200 w-screen min-w-full '>
+    <header className='flex flex-col w-screen min-w-full '>
 
 <section>    <div className='flex p-4'>
  <button  onClick={openDropDown}  className='flex gap-2 px-2 '>
         <div className='text-center flex flex-col items-center'>
-<FcSearch  color=' white' size={24}/>
+<FcSearch   size={24}/>
 <p>Axtarış</p>
         </div>
-        <div><GoTriangleDown size={22} /></div>
+        <div><GoTriangleDown size={22}  color='white' /></div>
       </button>
       <button className='flex gap-2 px-2 relative'>
         <div  className='text-center flex flex-col items-center'>
@@ -49,22 +50,21 @@ const {openDropDown,isOpenDropDown}= useDropDown()
         </div>
       </button>
       <div className= {isOpenDropDown ?  ' bg-white px-4   py-2 absolute top-16': 'hidden'} >
-<ul className=' flex flex-col gap-2   '>
-  <li  className='hover-green'>Standart axtarış</li>
-  <li className='border-b-1 border-gray-400 hover-green '>Suretli axtaris panelini goster</li>
-  <li  className='hover-green'>Kecid uzre axtaris(emlak bazasi serverinde,18 mln elan arasinda axtaris)</li>
-  <li className='border-b-1 border-gray-400 hover-green '>Acar soz uzre etrafli axtaris</li>
-  <li className='hover-green'>Telefon nomresi uzre axtaris</li>
-  <li className='border-b-1 border-gray-400 hover-green '>Huquq sahibi uzre axtaris</li>
-  <li className='hover-green'>Elaqeli sexs uzre axtaris</li>
-  <li className='border-b-1 border-gray-400 hover-green '>Sheher uzre axtaris</li>
-  <li className='hover-green'>Nishangah uzre axtaris</li>
-  <li className='border-b-1 border-gray-400 hover-green '>Email uzre axtaris</li>
-  <li className='hover-green'>Skype unvani uzre axtaris</li>
-  <li className='border-b-1 border-gray-400 hover-green '>Secilen istifadecinin mesul oldugu emlaklar</li>
-  <li className='hover-green'>Secilen istifadecinin baresinde melumat verdiyi emlaklar</li>
-  <li className='border-b-1 border-gray-400 hover-green '>MTK uzre axtaris</li>
-  <li className='hover-green'>Internetden oxunan(tesdiq edilmeyenler)</li>
+<ul className=' flex flex-col gap-2  font-bolder  '>
+  <li  className='hover-purple'>Standart axtarış</li>
+  <li className='border-b-1 border-gray-400 hover-purple '>Surətli axtaris panelini göstər</li>
+  <li  className='hover-purple'>Keçid üzrə axtariş(əmlak bazası serverinde,18 mln elan arasında axtariş)</li>
+  <li className='border-b-1 border-gray-400 hover-purple '>Acar soz uzre etrafli axtaris</li>
+  <li className='hover-purple'>Telefon nömrəsi üzrə axtarış</li>
+  <li className='border-b-1 border-gray-400 hover-purple '>Hüquq sahibi uzrə axtarış</li>
+  <li className='hover-purple'>Əlaqəli şəxs üzrə axtarış</li>
+  <li className='border-b-1 border-gray-400 hover-purple '>Sheher uzre axtaris</li>
+  <li className='hover-purple'>Nişhangah üzrə axtarış</li>
+  <li className='border-b-1 border-gray-400 hover-purple '>Email üzrə axtarış</li>
+  <li className='border-b-1 border-gray-400 hover-purple '>Seçilən istifadəçinin məsul olduğu əmlaklar</li>
+  <li className='hover-purple'>Seçilən istifadəçinin barəsində məlumat verdiyi əmlaklar</li>
+  <li className='border-b-1 border-gray-400 hover-purple '>MTK üzrə axtarış</li>
+  <li className='hover-purple'>İnternetdən oxunan(təsdiq edilmeyənlər)</li>
 </ul>
 
       </div>
@@ -74,7 +74,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 <FaFile className=" text-blue-300" size={24} />
 <p>Baxış</p>
         </div>
-        <div>        <div><GoTriangleDown size={22} /></div>
+        <div>        <div><GoTriangleDown size={22}   color='white' /></div>
 </div>
       </button>
 
@@ -84,16 +84,16 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 
 <p>Əlavə et</p>
         </div>
-        <div>        <div><GoTriangleDown size={22} /></div>
+        <div>        <div><GoTriangleDown size={22}  color='white' /></div>
 </div>
       </button>
           <button className='flex border-gray-400'>
         <div  className='text-center flex flex-col items-center'>
-<LuFilePenLine  className=" text-gray-500" size={24}/>
+<LuFilePenLine  className=" text-blue-300" size={24}/>
 
-<p>Redakte et</p>
+<p>Redaktə et</p>
         </div>
-        <div>        <div><GoTriangleDown size={22} /></div>
+        <div>        <div><GoTriangleDown size={22}  color='white' /></div>
 </div>
       </button>
           <button className='flex border-r-1 border-gray-400'>
@@ -109,9 +109,9 @@ const {openDropDown,isOpenDropDown}= useDropDown()
         <div  className='text-center flex flex-col items-center'>
 <IoEarth  className=" text-blue-300" size={24}/>
 
-<p className=' text-red-500'>Elanlari oxu</p>
+<p >Elanlari oxu</p>
         </div>
-        <div>        <div><GoTriangleDown size={22} color='red' /></div>
+        <div>        <div><GoTriangleDown size={22} color='white' /></div>
 </div>
       </button>
 
@@ -122,7 +122,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
                 <IoCall color='white' />
 </div>
 
-<p>Sifarishler</p>
+<p>Sifarişlər</p>
         </button>
       </div>
 
@@ -131,7 +131,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
         <button className='text-center flex flex-col items-center'>
 <FaMagento  className=" text-blue-300" size={24}/>
 
-<p>Agentler</p>
+<p>Agentlər</p>
         </button>
       </div>
 
@@ -145,7 +145,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 
 <p>Əlavələr</p>
         </div>
-        <div>        <div><GoTriangleDown size={22} /></div>
+        <div>        <div><GoTriangleDown size={22}  color='white'  /></div>
 </div>
       </button>
 
@@ -156,11 +156,11 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 
               <div className='flex gap-2 px-2 '>
         <div  className='text-center flex flex-col items-center'>
-<BsDatabase color="gray" size={24} />
+<BsDatabase className=" text-blue-300" size={24} />
 
 <p>Hesabatlar</p>
         </div>
-        <div>        <div><GoTriangleDown size={22} /></div>
+        <div>        <div><GoTriangleDown size={22}  color='white' /></div>
 </div>
       </div>
 
@@ -173,11 +173,11 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 
               <div className='flex  gap-2 px-2'>
         <div  className='text-center flex flex-col items-center'>
-<SlSettings color='gray' size={24}/>
+<SlSettings className=" text-blue-300" size={24}/>
 
 <p>İdarəetmə</p>
         </div>
-        <div>        <div><GoTriangleDown size={22} /></div>
+        <div>        <div><GoTriangleDown size={22}   color='white'/></div>
 </div>
       </div>
 
@@ -194,7 +194,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 
 <p>Haqqında</p>
         </div>
-        <div>        <div><GoTriangleDown size={22} /></div>
+        <div>        <div><GoTriangleDown size={22}  color='white' /></div>
 </div>
       </div>
 
@@ -208,14 +208,14 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 
         <div  className='flex gap-4'>
           <div  onClick={doubleClick} className=' flex items-center gap-4'> 
-          {showPanel ? <GoTriangleDown size={18} />
-: <GoTriangleUp size={18} /> 
+          {showPanel ? <GoTriangleDown size={18}  color='white'/>
+: <GoTriangleUp size={18} color='white' /> 
  } 
-          <p className='  cursor-pointer text-blue-400'>{showPanel ? "sürətli axtaris panelini gizlət" :'sürətli axtaris panelini ac' }</p>
+          <p className='  cursor-pointer text-blue-400'>{showPanel ? "sürətli axtarış panelini gizlət" :'sürətli axtarış panelini aç' }</p>
 </div>
             <div className=' flex gap-1'>
 
-<p className=' text-pink-500'>axtarışı yenilə</p>
+<p className=' text-purple-500'>axtarışı yenilə</p>
 </div>
 
 
@@ -234,7 +234,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 
    
 
-    Satis
+    Satış
  </label>
   <input type="checkbox" 
     name='kiraye'
@@ -242,7 +242,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
   <label htmlFor="">
 
   
-    Kiraye
+    Kirayə
  </label>
 
 
@@ -251,7 +251,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 
 
 <div className=' flex  justify-between my-2 me-2 '>
-    <div>   <label htmlFor="">    <input  type="checkbox" /> Qiymet
+    <div>   <label htmlFor="">    <input  type="checkbox" /> Qiymət
 </label></div>
   
 
@@ -272,7 +272,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 </div>
 
 <div className=' flex  justify-between '>
-    <label htmlFor="">    <input type="checkbox" /> Sahe
+    <label htmlFor="">    <input type="checkbox" /> Sahə
 </label>
 
 <div className=' flex'>
@@ -296,22 +296,22 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 <div>
     <h1>Mənzillər(Yeni tikili)</h1>
     <ul>
-        <li>1-otaqli</li>
-        <li>2-otaqli</li>
-        <li>3-otaqli</li>
-        <li>4-otaqli</li>
-        <li>5-otaqli</li>
+        <li>1-otaqlı</li>
+        <li>2-otaqlı</li>
+        <li>3-otaqlı</li>
+        <li>4-otaqlı</li>
+        <li>5-otaqlı</li>
     </ul>
 </div>
 
 <div >
-    <h1>Mənzillər(Kohne tikili)</h1>
+    <h1>Mənzillər(Köhnə tikili)</h1>
     <ul>
-        <li>1-otaqli</li>
-        <li>2-otaqli</li>
-        <li>3-otaqli</li>
-        <li>4-otaqli</li>
-        <li>5-otaqli</li>
+        <li>1-otaqlı</li>
+        <li>2-otaqlı</li>
+        <li>3-otaqlı</li>
+        <li>4-otaqlı</li>
+        <li>5-otaqlı</li>
     </ul>
 </div>
 
@@ -321,9 +321,9 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 <div className='px-4'>
     <ul className=''>
         <li>Torpaqlar</li>
-        <li>Ferdi yasayis evleri</li>
-        <li>bag evleri</li>
-        <li>Qeyri yasayis saheleri</li>
+        <li>Fərdi yasayış evləri</li>
+        <li>bag evləri</li>
+        <li>Qeyri yasayiş sahələri</li>
         <li>Qarajlar</li>
     </ul>
 </div>
@@ -343,7 +343,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
         <div className='flex gap-1'> <input type="checkbox" />
         <label htmlFor="">Bakmil</label>  </div>
          <div className='flex gap-1'> <input type="checkbox" />
-        <label htmlFor="">Cefer cabbarli</label></div>
+        <label htmlFor="">Cəfər Cabbarlı</label></div>
        
     </div>
     
@@ -361,7 +361,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
          <div className='flex gap-1'>   <input type="checkbox" />
         <label htmlFor="">Bakı şəhəri Xəzər rayonu</label></div>
        <div className='flex gap-1'>  <input type="checkbox" />
-        <label htmlFor="">Bakı şəhəriSəbail rayonu</label></div>
+        <label htmlFor="">Bakı şəhəri Səbail rayonu</label></div>
         <div className='flex gap-1'> <input type="checkbox" />
         <label htmlFor="">Bakı şəhəri Sabunçu rayonu</label>  </div>
         <div className='flex gap-1'>  <input type="checkbox" />

@@ -3,6 +3,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+   --main-purple: #481277;
+   --hd-purple:#cbace6;
+  --main-blue: #3b82f6;
+  --main-green: #10b981;
 }
 
 @theme inline {
@@ -30,11 +35,16 @@ button{
   cursor: pointer;
 }
 button:hover{
-  background-color: rgb(173, 170, 170);
+  background-color: rgb(236, 228, 228);
   scale: 1.05;
 }
 
-.hover-green:hover {
-  color: rgb(10, 90, 10);
+.hover-purple:hover {
+  color: var(--main-purple);
   cursor: pointer;
+  background-color: var(--hd-purple) 
+}
+
+header{
+  background-color: var(--hd-purple);
 }
