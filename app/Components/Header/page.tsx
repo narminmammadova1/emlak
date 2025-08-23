@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FcSearch } from "react-icons/fc";
 import { FaFile } from "react-icons/fa";
 import { BiPlusMedical } from "react-icons/bi";
@@ -32,6 +32,23 @@ setShowPanel((prew)=>!prew)
 
 const {openDropDown,isOpenDropDown}= useDropDown()
 
+const dropdownRef=useRef<HTMLDivElement>(null)
+
+useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (isOpenDropDown) openDropDown(); // toggle bağlamaq üçün
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, [isOpenDropDown]);
+
+
+
+
+
   return (
     <header className='flex flex-col w-screen min-w-full '>
 
@@ -49,7 +66,7 @@ const {openDropDown,isOpenDropDown}= useDropDown()
 <p>Geniş axtarış</p>
         </div>
       </button>
-      <div className= {isOpenDropDown ?  ' bg-white px-4   py-2 absolute top-16': 'hidden'} >
+      <div  ref={dropdownRef} className= {isOpenDropDown ?  ' bg-white px-4   py-2 absolute top-16': 'hidden'} >
 <ul className=' flex flex-col gap-2  font-bolder  '>
   <li  className='hover-purple'>Standart axtarış</li>
   <li className='border-b-1 border-gray-400 hover-purple '>Surətli axtaris panelini göstər</li>

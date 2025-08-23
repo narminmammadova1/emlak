@@ -7,7 +7,6 @@ export default function Home() {
     <div >
 
 <Table/>
-<div className="flex justify-center items-center mt-10">Melumat yoxdur</div>
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default function RootLayout({ children }:RootLayoutProps) {
       >
 <div className="w-[2000px]">         <Header/>
 </div>
-       <main className="flex max-h-screen w-[2000px]">
+       <main className="flex max-h-screen">
           {children}
         </main>
 

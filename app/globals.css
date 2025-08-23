@@ -35,8 +35,7 @@ button{
   cursor: pointer;
 }
 button:hover{
-  background-color: rgb(236, 228, 228);
-  scale: 1.05;
+  scale: 1.1;
 }
 
 .hover-purple:hover {
@@ -47,4 +46,44 @@ button:hover{
 
 header{
   background-color: var(--hd-purple);
+}
+
+
+.limited-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 2 sətr */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+ 
+}
+tr:hover{
+
+  background-color: #ca9df0;
+  cursor: pointer;
+}
+
+
+.td-relative {
+  position: relative;
+  cursor: pointer;
+}
+
+.popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  margin-top: 4px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.td-relative:hover .popup {
+  opacity: 1;
+  pointer-events: auto;
 }

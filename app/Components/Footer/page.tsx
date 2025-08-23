@@ -26,7 +26,7 @@ const Footer = () => {
         <div className='flex border-x-1 px-1 border-gray-400'>
           <button className='flex gap-1 items-center'>
                    <TbRefresh  className=" text-blue-400" />
-Melumatı yenilə
+Məlumatı yenilə
           </button>
         </div>
            <div className='border-r-1 px-1 border-gray-400' >

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { SlSettings } from "react-icons/sl";
 import { FaSearch } from "react-icons/fa";
+import { FaImage } from "react-icons/fa";
 
 const Table = () => {
 
@@ -12,25 +13,6 @@ const[page,setPage]=useState(1)
 const [hasMore,setHasMore]=useState(true)
 
 //elanlarin API-den cekilmesi
-
-//  const fetchDataFromAPI = async (pageNumber: number) => {
-//     try {
-//       setLoading(true);
-//       const res = await fetch(`https://e-baza.az/api/lproperty/filter?page=${pageNumber}&pagesize=200`);
-//       const json = await res.json();
-//             console.log("json",json);
-
-//       return json;
-
-      
-//     } catch (error) {
-//       console.error("Xəta:", error);
-//       return [];
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
 
 const fetchDataFromAPI = async (pageNumber: number) => {
   try {
@@ -92,7 +74,7 @@ const fetchDataFromAPI = async (pageNumber: number) => {
   
   return (
     <div>
-         <table className='table-auto border-collapse border min-w-[2000px] border-gray-400  overflow-x-auto '>
+         <table className='table-auto overflow-x-auto border-collapse border min-w-[2000px] border-gray-400  '>
             <thead>
 <tr  >
     <th className="border  border-gray-300 pe-4 "><SlSettings color='gray' />
@@ -102,6 +84,8 @@ const fetchDataFromAPI = async (pageNumber: number) => {
 <th className="border border-gray-300 pe-1 ">Elanin tarixi</th>
 <th className="border border-gray-300 pe-1 "> Oxunma tarixi</th>
 <th className="border border-gray-300 pe-1 ">Əmlakın növü</th>
+<th className="border border-gray-300 pe-1 ">Şəkil</th>
+
 <th className="border border-gray-300 pe-1 ">Əməliyyat</th>
 <th className="border border-gray-300 pe-1 ">Şəhər,rayon,qəsəbə</th>
 <th className="border border-gray-300 pe-1 ">Metro</th>
@@ -147,7 +131,7 @@ const fetchDataFromAPI = async (pageNumber: number) => {
             <tbody>
  {data.map((item ,index)=>(
 
-  <tr key={`${item.idProperty}-${index}`}>
+  <tr className='odd:bg-white even:bg-gray-100' key={`${item.idProperty}-${index}`}>
   <td className="border border-gray-300 text-center">
    {index+1}
   </td>
@@ -156,11 +140,22 @@ const fetchDataFromAPI = async (pageNumber: number) => {
     <td className="border border-gray-300">{item.reminderDate}</td>
 
   <td className="border border-gray-300">{item.propertyType}</td>
+    <td className="border border-gray-300">
+   <FaImage color='purple'  size={24}/>
+</td>
+
   <td className="border border-gray-300">{item.operation}</td>
   <td className="border border-gray-300">{item.region }</td>
   <td className="border border-gray-300">{item.metro }</td>
   <td className="border border-gray-300">{item.target }</td>
-  <td className="border border-gray-300">{item.address}</td>
+  <td className="border border-gray-300 whitespace-pre-wrap relative group cursor-pointer">
+  <div className="limited-text">
+    {item.address}
+  </div>
+  <div className="absolute  left-0 z-50  top-4 w-full p-2 bg-white border border-gray-400 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-200 group-hover:opacity-100">
+    {item.address}
+  </div>
+</td>
   <td className="border border-gray-300">{item.roomCaption}</td>
   <td className="border border-gray-300">{item.buildingType }</td>
   <td className="border border-gray-300">{item.floorCaption}</td>
@@ -171,7 +166,14 @@ const fetchDataFromAPI = async (pageNumber: number) => {
   <td className="border border-gray-300">{item.document }</td>
   <td className="border border-gray-300">{item.repair }</td>
   <td className="border border-gray-300">{item.code}</td>
-  <td className="border border-gray-300 whitespace-pre-wrap">{item.data}</td>
+<td className="border border-gray-300 whitespace-pre-wrap relative group cursor-pointer">
+  <div className="limited-text">
+    {item.data}
+  </div>
+  <div className="absolute  left-0 z-50  top-4 w-full p-2 bg-white border border-gray-400 rounded shadow-lg opacity-0 pointer-events-auto transition-opacity duration-200 group-hover:opacity-100">
+    {item.data}
+  </div>
+</td>
   <td className="border border-gray-300">{item.source }</td>
   <td className="border border-gray-300">{item.fkIdResponsibleUser }</td>
   <td className="border border-gray-300">{item.fkIdProvidingUser }</td>

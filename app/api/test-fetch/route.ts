@@ -1,6 +1,6 @@
 export async function GET() {
   try {
-    const res = await fetch(`https://e-baza.az/api/lproperty/filter?page=1&pagesize=5`);
+    const res = await fetch(`https://e-baza.az/api/lproperty/filter?page=1&pagesize=200`);
     const data = await res.json();
     console.log("API cavabı:", data);
     return new Response(JSON.stringify(data), {
