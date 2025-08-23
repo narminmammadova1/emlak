@@ -40,7 +40,7 @@ export default function RootLayout({ children }:RootLayoutProps) {
         </main>
 
         
-        <div className=" w-[2000px] ">        <Footer/>
+        <div className=" w-[2000px] fixed bottom-0">        <Footer/>
 </div>
       </body>
     </html>
