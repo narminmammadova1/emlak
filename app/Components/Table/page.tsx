@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { SlSettings } from "react-icons/sl";
 import { FaSearch } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
@@ -17,9 +17,11 @@ const [hasMore,setHasMore]=useState(true)
 const fetchDataFromAPI = async (pageNumber: number) => {
   try {
     setLoading(true);
-    const res = await fetch(`/api/test-fetch`);
+        console.log(`Fetching page: ${pageNumber}`);
+
+const res = await fetch(`/api/tableData?page=${pageNumber}&pagesize=200`);
+
     const json = await res.json();
-    console.log("json", json);
     return json;
   } catch (error) {
     console.error("Xəta:", error);
@@ -30,7 +32,8 @@ const fetchDataFromAPI = async (pageNumber: number) => {
 };
 
 
-
+console.log("Fetching page", page);
+console.log("length data", data.length);
 
 
   //  2. Gələn datanı mövcud state-ə əlavə edən funksiya
@@ -44,12 +47,12 @@ const fetchDataFromAPI = async (pageNumber: number) => {
   };
 
   //  3. Scroll zucun funksiya
-  const handleScrollEvent = () => {
-    const bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-    if (bottom && !loading && hasMore) {
-      loadMoreData();
-    }
-  };
+  const handleScrollEvent = useCallback(() => {
+const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+  if (bottom && !loading && hasMore) {
+    loadMoreData();
+  }
+}, [loading, hasMore]);
 
   // 4. Data yükləyən 
   const loadMoreData = async () => {
@@ -70,9 +73,9 @@ const fetchDataFromAPI = async (pageNumber: number) => {
 
   if (data.length === 0 && loading){
  return (
-    <div className="fixed inset-0 flex justify-center items-center bg-opacity-70 z-50">
-      <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-    </div>
+    <div className="fixed inset-0 flex justify-center items-center bg-opacity-100 z-50">
+  <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+</div>
   )
   }
     

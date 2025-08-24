@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 
 const useDropDown = () => {
 
-const [isOpenDropDown,setisOpenDropDown]=useState(false)
-const openDropDown=()=>setisOpenDropDown(!isOpenDropDown)
-
+const [isOpenDropDown,setIsOpenDropDown]=useState(false)
+  const openDropDown = () => setIsOpenDropDown(true)
+  const closeDropDown = () => setIsOpenDropDown(false)
+  const toggleDropDown = () => setIsOpenDropDown(prev => !prev)
 
   return {
-
-    isOpenDropDown,openDropDown
+    isOpenDropDown,
+    openDropDown,
+    closeDropDown,
+    toggleDropDown,
   }
    
 }

@@ -110,3 +110,30 @@ padding-left: 8px;
   font-size: 16px;
   
 }
+
+
+
+
+.scroll-container {
+  overflow-y: auto; /* Y ekseninde scroll */
+  /* Scroll oluşması için yükseklik sınırı */
+}
+
+/* WebKit Scrollbar Özelleştirmesi */
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: var(--main-purple);
+  border-radius: 4px
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: var(--hd-purple)
+}

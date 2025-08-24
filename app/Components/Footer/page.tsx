@@ -114,6 +114,8 @@ Bugün daxil edilenlər
 </div>
 
       </section>
+
+
     </footer>
   )
 }

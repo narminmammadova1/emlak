@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useEffect, useRef, useState } from 'react'
 import { FcSearch } from "react-icons/fc";
 import { FaFile } from "react-icons/fa";
@@ -14,37 +13,60 @@ import { RiInformationFill } from "react-icons/ri";
 import { SlSettings } from "react-icons/sl";
 import { GoTriangleUp } from "react-icons/go";
 import { GoTriangleDown } from "react-icons/go";
-
 import { LuFilePenLine } from "react-icons/lu";
 import useDropDown from '@/app/Hooks/useDropDown';
 import Modal from '../Modal/Modal';
 import ModalSearch from '@/app/ModalSearch/ModalSearch';
 import useAppContext from '@/context/useAppContext';
 
-
+import {
+  RoomCount,
+  BuildingType,
+  PropertyType,
+  MetroType,
+  RegionType
+} from "@/app/interfaces/interface"
 
 const Header = () => {
 
+  const [roomCounts, setRoomCounts] = useState<RoomCount[]>([]);
+const [buildingTypes,setBuildingTypes]=useState<BuildingType[]>([])
+const [propertTypes,setPropertyTypes]=useState<PropertyType[]>([])
+const [metroNames,setMetroNames]=useState<MetroType[]>([])
+const [regionNames,setRegionNames]=useState<RegionType[]>([])
 const [showPanel,setShowPanel]=useState(true)
-const {openDropDown,isOpenDropDown}= useDropDown()
+
+const {openDropDown,isOpenDropDown,toggleDropDown,closeDropDown}= useDropDown()
   const { isOpenSearchModal,toggleSearchModal } = useAppContext();
+
 const dropdownRef=useRef<HTMLDivElement>(null)
+const buttonRef = useRef<HTMLButtonElement>(null);
+
+//suretli axtarish paneli ucun
 const doubleClick=()=>{
 setShowPanel((prew)=>!prew)
 }
 
 
-
+//dropdown baglanmasi ucun
 useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-      if (isOpenDropDown) openDropDown(); // toggle bağlamaq üçün
+    const target = event.target as Node;
+
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(target)
+    ) {
+      closeDropDown();
     }
   };
 
   document.addEventListener("mousedown", handleClickOutside);
   return () => document.removeEventListener("mousedown", handleClickOutside);
-}, [isOpenDropDown]);
+}, []);
+
 
 
 useEffect(() => {
@@ -60,11 +82,50 @@ useEffect(() => {
 }, [isOpenSearchModal]);
 
 
+//suretli axtaris paneli ucun Promise.all ile umumi fetch
+
+useEffect(() => {
+  const fetchAllData = async () => {
+    try {
+      const [res1, res2,res3,res4,res5] = await Promise.all([
+        fetch("/api/roomcounts"),
+        fetch("/api/buildingtypes"),
+        fetch("/api/propertyTypes"),
+        fetch("/api/metro"),
+        fetch("/api/regions")
+      ]);
+     if (!res1.ok || !res2.ok || !res3.ok || !res4.ok || !res5.ok) {
+  throw new Error("One or more API calls failed");
+}
+
+      const data1 = await res1.json();
+      const data2 = await res2.json();
+      const data3=await res3.json()
+      const data4=await res4.json()
+      const data5=await res5.json()
+      setRoomCounts(data1);
+      setBuildingTypes(data2);
+      setPropertyTypes(data3)
+      setMetroNames(data4)
+      setRegionNames(data5)
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
+
+  fetchAllData();
+}, []);
+
+
+useEffect(() => {
+  console.log("Fetched metros: ", metroNames);
+}, [metroNames]);
+
   return (
     <header className='flex flex-col w-screen min-w-full '>
 
 <section className=' relative'>    <div className='flex p-4'>
- <button  onClick={openDropDown}  className='flex gap-2 px-2 '>
+ <button  ref={buttonRef} onClick={ toggleDropDown}  className='flex gap-2 px-2 '>
         <div className='text-center flex flex-col items-center'>
 <FcSearch   size={24}/>
 <p>Axtarış</p>
@@ -102,7 +163,8 @@ useEffect(() => {
 <FaFile className=" text-blue-300" size={24} />
 <p>Baxış</p>
         </div>
-        <div>        <div><GoTriangleDown size={22}   color='white' /></div>
+        <div>
+            <div><GoTriangleDown size={22}   color='white' /></div>
 </div>
       </button>
 
@@ -124,7 +186,7 @@ useEffect(() => {
         <div>        <div><GoTriangleDown size={22}  color='white' /></div>
 </div>
       </button>
-          <button className='flex border-r-1 border-gray-400'>
+          <button className='flex border-r border-gray-400'>
         <div  className='text-center flex flex-col items-center px-2'>
 <FaMinus className=" text-blue-300" size={24}/>
 
@@ -132,7 +194,7 @@ useEffect(() => {
         </div>
       </button>
 
-<div className='flex border-r-1 border-gray-400 gap-2 px-2'>
+<div className='flex border-r border-gray-400 gap-2 px-2'>
       <button className='flex '>
         <div  className='text-center flex flex-col items-center'>
 <IoEarth  className=" text-blue-300" size={24}/>
@@ -165,7 +227,7 @@ useEffect(() => {
 
 </div>
 
-<div className='flex border-r-1 border-gray-400' >
+<div className='flex border-r border-gray-400' >
 
               <button className='flex gap-2 px-2'>
         <div  className='text-center flex flex-col items-center'>
@@ -180,7 +242,7 @@ useEffect(() => {
 
 </div>
 
-<button className='flex border-r-1 border-gray-400' >
+<button className='flex border-r border-gray-400' >
 
               <div className='flex gap-2 px-2 '>
         <div  className='text-center flex flex-col items-center'>
@@ -197,7 +259,7 @@ useEffect(() => {
 
 </button>
 
-<button className='flex border-r-1 border-gray-400' >
+<button className='flex border-r border-gray-400' >
 
               <div className='flex  gap-2 px-2'>
         <div  className='text-center flex flex-col items-center'>
@@ -214,7 +276,7 @@ useEffect(() => {
 
 </button>
 
-<button className='flex border-r-1 border-gray-400' >
+<button className='flex border-r border-gray-400' >
 
               <div className='flex gap-2 px-2 '>
         <div  className='text-center flex flex-col items-center'>
@@ -278,15 +340,15 @@ useEffect(() => {
     </div>
 
 
-<div className=' flex  justify-between my-2 me-2 '>
-    <div>   <label htmlFor="">    <input  type="checkbox" /> Qiymət
+<div className=' flex items-center gap-2  justify-between my-2 me-2 '>
+    <div className=' flex items-center gap-2'> <input  type="checkbox" />  <label htmlFor="">  Qiymət
 </label></div>
   
 
 
 
 
-<div className='flex  '><input type="number" placeholder='0' className='w-[50px] bg-white' />
+<div className='flex  '><input type="number" placeholder='0' className='w-[60px] bg-white' />
         <div><select name="" id=""></select></div></div>
 <div className='px-2'> <p>-</p></div>
         
@@ -294,23 +356,23 @@ useEffect(() => {
 
 
 
-<div className=' flex '> <input type="number" placeholder='10000000' className='w-[50px] bg-white' />
+<div className=' flex '> <input type="number" placeholder='10000000' className='w-[60px] bg-white' />
         <div><select name="" id=""></select></div></div>
 
 </div>
 
-<div className=' flex  justify-between '>
-    <label htmlFor="">    <input type="checkbox" /> Sahə
+<div className=' flex   gap-3 items-center'>
+    <input type="checkbox" /> <label htmlFor="">    Sahə
 </label>
 
-<div className=' flex'>
+<div className=' flex gap-2'>
     
-     <div className='flex'><input type="number" placeholder='0' className='w-[50px] bg-white' />
+     <div className='flex '><input type="number" placeholder='0' className='w-[60px] bg-white' />
         <div><select name="" id=""></select></div></div>
 
 <div className='px-2'> <p>-</p></div>
 <div className=' flex  me-2 '>
-    <input type="number" placeholder='500' className='w-[50px] bg-white' />
+    <input type="number" placeholder='500' className='w-[60px] bg-white' />
         <div><select name="" id=""></select></div></div></div>
 
 
@@ -320,84 +382,62 @@ useEffect(() => {
 </div>
 
 
-<div className=' flex gap-3 px-2'>
-<div>
-    <h1>Mənzillər(Yeni tikili)</h1>
-    <ul>
-        <li>1-otaqlı</li>
-        <li>2-otaqlı</li>
-        <li>3-otaqlı</li>
-        <li>4-otaqlı</li>
-        <li>5-otaqlı</li>
-    </ul>
-</div>
+<div className=' flex gap-6 px-2 bg-white  w-[200px] max-h-[140px] scroll-container overflow-y-auto'>
+ {buildingTypes.map((type) => (
+    <div   key={`${type.buildingTypeName}-${type.idBuildingType}`}>
+      <h1 className=' font-bold'>{type.buildingTypeName}</h1>
+      <ul className=''>
+        {roomCounts.map((room) => (
+          <li  className='hover-purple mt-1'      key={`${type.buildingTypeName}-${type.idBuildingType}-${room.roomCountName}-${room.idRoomCount}`}>{room.roomCountName}</li>
+        ))}
+      </ul>
+    </div>
+  ))}
 
-<div >
-    <h1>Mənzillər(Köhnə tikili)</h1>
-    <ul>
-        <li>1-otaqlı</li>
-        <li>2-otaqlı</li>
-        <li>3-otaqlı</li>
-        <li>4-otaqlı</li>
-        <li>5-otaqlı</li>
-    </ul>
-</div>
 
 </div>
 
 
-<div className='px-4'>
+
+
+
+<div className='px-4 ms-4 bg-white max-h-[140px] w-[200px] scroll-container overflow-y-auto '>
     <ul className=''>
-        <li>Torpaqlar</li>
-        <li>Fərdi yasayış evləri</li>
-        <li>bag evləri</li>
-        <li>Qeyri yasayiş sahələri</li>
-        <li>Qarajlar</li>
+        <p className=' font-bold'>Əmlak növü</p>
+        {propertTypes.map((prop)=>(
+        <li className='hover-purple mt-1' key={prop.idPropertyType}>
+                {prop.propertyTypeName}
+        </li>
+
+        ))}
+        
     </ul>
 </div>
 
-<div className='px-4'>
-    <div className='flex mb-1 gap-1'> <label htmlFor="">Metrolar:</label>
+<div className='px-4 max-h-[140px]  ms-4  overflow-y-auto scroll-container bg-white'>
+    <div className='flex mb-1 gap-1 it'> <label className=' font-bold' htmlFor="">Metrolar:</label>
     <input type="text" className=' bg-white' /></div>
-    <div className=' flex flex-col max-h-[110px] overflow-y-auto bg-white '>
-        <div className='flex gap-1'> <input type="checkbox" />
-        <label htmlFor="">20 Yanvar</label></div>
-       <div className='flex gap-1'> <input type="checkbox" />
-        <label htmlFor="">28 May</label></div>
-         <div className='flex gap-1'>   <input type="checkbox" />
-        <label htmlFor="">Avtovagzal</label></div>
-       <div className='flex gap-1'>  <input type="checkbox" />
-        <label htmlFor="">Azadliq prospekti</label></div>
-        <div className='flex gap-1'> <input type="checkbox" />
-        <label htmlFor="">Bakmil</label>  </div>
-         <div className='flex gap-1'> <input type="checkbox" />
-        <label htmlFor="">Cəfər Cabbarlı</label></div>
-       
+    <div className=' flex flex-col  '>
+        {metroNames.map((metro)=>(
+                 <div className='flex gap-1 items-center hover-purple' key={`${metro.metroName}-${metro.id}`}> <input id={metro.id}  type="checkbox" />
+        <label htmlFor="">{metro.metroName}</label></div>
+        ))}
+
     </div>
     
 </div>
 
 
-<div className=' '>
-    <div className='flex mb-1 gap-1'> <label htmlFor="">Rayonlar:</label>
+<div className='bg-white px-4 ms-4 max-h-[140px] scroll-container overflow-y-auto '>
+    <div className='flex mb-1 gap-1'> <label className=' font-bold' htmlFor="">Rayonlar:</label>
     <input type="text"  className='bg-white '/></div>
-    <div className=' flex flex-col bg-white max-h-[110px] overflow-y-auto'>
-        <div className='flex gap-1'> <input type="checkbox" />
-        <label htmlFor="">Bakı şəhəri Binəqədi rayonu</label></div>
-       <div className='flex gap-1'> <input type="checkbox" />
-        <label htmlFor="">Bakı şəhəri Qaradağ rayonu</label></div>
-         <div className='flex gap-1'>   <input type="checkbox" />
-        <label htmlFor="">Bakı şəhəri Xəzər rayonu</label></div>
-       <div className='flex gap-1'>  <input type="checkbox" />
-        <label htmlFor="">Bakı şəhəri Səbail rayonu</label></div>
-        <div className='flex gap-1'> <input type="checkbox" />
-        <label htmlFor="">Bakı şəhəri Sabunçu rayonu</label>  </div>
-        <div className='flex gap-1'>  <input type="checkbox" />
-        <label htmlFor="">Bakı şəhəri Suraxanı rayonu</label>  </div>
-       
-        <div className='flex gap-1'>  <input type="checkbox" />
-        <label htmlFor="">Bakı şəhəri Suraxanı rayonu</label>  </div>
-      
+    <div className=' flex flex-col '>
+        {regionNames.map((region)=>(
+
+   <div    key={`${region.regionName}-${region.idRegion}`} className='flex gap-1 items-center hover-purple'> <input id={region.idRegion}  type="checkbox" />
+        <label htmlFor="">{region.regionName}</label></div>
+        ))}
+     
     </div>
     
 </div>
