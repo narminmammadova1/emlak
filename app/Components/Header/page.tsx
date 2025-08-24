@@ -419,7 +419,7 @@ useEffect(() => {
     <input type="text" className=' bg-white' /></div>
     <div className=' flex flex-col  '>
         {metroNames.map((metro)=>(
-                 <div className='flex gap-1 items-center hover-purple' key={`${metro.metroName}-${metro.id}`}> <input id={metro.id}  type="checkbox" />
+                 <div className='flex gap-1 items-center hover-purple' key={`${metro.metroName}-${metro.id}`}> <input id={metro.id?.toString()}  type="checkbox" />
         <label htmlFor="">{metro.metroName}</label></div>
         ))}
 
@@ -434,7 +434,7 @@ useEffect(() => {
     <div className=' flex flex-col '>
         {regionNames.map((region)=>(
 
-   <div    key={`${region.regionName}-${region.idRegion}`} className='flex gap-1 items-center hover-purple'> <input id={region.idRegion}  type="checkbox" />
+   <div    key={`${region.regionName}-${region.idRegion}`} className='flex gap-1 items-center hover-purple'> <input id={region.idRegion?.toString()}  type="checkbox" />
         <label htmlFor="">{region.regionName}</label></div>
         ))}
      
