@@ -58,7 +58,7 @@ header{
 }
 tr:hover{
 
-  background-color: #ca9df0;
+  background-color:var(--hd-purple);
   cursor: pointer;
 }
 
@@ -130,10 +130,10 @@ padding-left: 8px;
 }
 
 .scroll-container::-webkit-scrollbar-thumb {
-  background: var(--main-purple);
+  background: var(--hd-purple);
   border-radius: 4px
 }
 
 .scroll-container::-webkit-scrollbar-thumb:hover {
-  background: var(--hd-purple)
+  background: rgb(212, 205, 205);
 }

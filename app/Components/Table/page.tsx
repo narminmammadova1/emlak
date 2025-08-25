@@ -4,6 +4,8 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { SlSettings } from "react-icons/sl";
 import { FaSearch } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
+import useAppContext from '@/context/useAppContext';
+import throttle from 'lodash/throttle';
 
 const Table = () => {
 
@@ -11,6 +13,11 @@ const [data,setData]=useState<any[]>([])
 const [loading,setLoading]=useState(true)
 const[page,setPage]=useState(1)
 const [hasMore,setHasMore]=useState(true)
+
+  const { showPanel} = useAppContext();
+
+
+
 
 //elanlarin API-den cekilmesi
 
@@ -46,30 +53,35 @@ console.log("length data", data.length);
     }
   };
 
-  //  3. Scroll zucun funksiya
-  const handleScrollEvent = useCallback(() => {
-const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
-  if (bottom && !loading && hasMore) {
-    loadMoreData();
-  }
-}, [loading, hasMore]);
+const handleScrollEvent = useCallback(
+  throttle(() => {
+    const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+    if (bottom && !loading && hasMore) {
+      loadMoreData();
+    }
+  }, 500), // 500ms-də bir dəfə icra olunmasi ucun
+  [loading, hasMore]
+);
+
+useEffect(() => {
+  window.addEventListener("scroll", handleScrollEvent);
+  return () => window.removeEventListener("scroll", handleScrollEvent);
+}, [handleScrollEvent]);
+
 
   // 4. Data yükləyən 
   const loadMoreData = async () => {
-    const result = await fetchDataFromAPI(page);
-    appendData(result);
-  };
+  const result = await fetchDataFromAPI(page); // state-dən gələn page
+  appendData(result);
+};
+
 
   //  5. İlk yükləmə
   useEffect(() => {
     loadMoreData();
   }, []);
 
-  // 6. Scroll listener
-  useEffect(() => {
-    window.addEventListener("scroll", handleScrollEvent);
-    return () => window.removeEventListener("scroll", handleScrollEvent);
-  }, [page, loading, hasMore]);
+  
 
   if (data.length === 0 && loading){
  return (
@@ -84,9 +96,9 @@ const bottom = window.innerHeight + window.scrollY >= document.documentElement.s
 
   
   return (
-    <div>
-         <table className='table-auto overflow-x-auto border-collapse border min-w-[2000px] border-gray-400  '>
-            <thead>
+    <div  className={`   ${showPanel? "top-60 ":"top-20"}  border-2  z-10 shadow-md`}>
+         <table className={`table-auto overflow-x-auto border-collapse   ${showPanel? "mt-60 ":"mt-20"} border min-w-[2000px] border-gray-400  `}>
+            <thead className={`  sticky  ${showPanel? "top-60 ":"top-20"}  border-2 border-purple-500 z-20  bg-white shadow-md`}>
 <tr  >
     <th className="border  border-gray-300 pe-4 "><SlSettings color='gray' />
     </th>
@@ -139,11 +151,11 @@ const bottom = window.innerHeight + window.scrollY >= document.documentElement.s
     </td>
   </tr>
             </thead>
-            <tbody>
+            <tbody  className=' mt-[60px] ' >
  {data.map((item ,index)=>(
 
-  <tr className='odd:bg-white even:bg-gray-100' key={`${item.idProperty}-${index}`}>
-  <td className="border border-gray-300 text-center">
+  <tr className='odd:bg-white even:bg-gray-100  ' key={`${item.idProperty}-${index}`}>
+  <td className="border border-gray-300 text-center ">
    {index+1}
   </td>
   <td className="border border-gray-300">{item.idProperty}</td>
@@ -181,7 +193,7 @@ const bottom = window.innerHeight + window.scrollY >= document.documentElement.s
   <div className='relative'>   <div className="limited-text ">
     {item.data}
   </div>
-  <div className="absolute  left-0 z-10  top-4 w-full p-2 bg-white border border-gray-400 rounded shadow-lg opacity-0 pointer-events-auto transition-opacity duration-200 group-hover:opacity-100">
+  <div className="absolute  left-2   top-4 w-full p-2 z-30 bg-white border border-gray-400 rounded shadow-lg opacity-0 pointer-events-auto transition-opacity duration-200 group-hover:opacity-100">
     {item.data}
   </div></div>
 

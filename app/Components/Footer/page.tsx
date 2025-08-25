@@ -11,11 +11,9 @@ import { FaMinusCircle } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className=' bg-gray-200  ps-2'>
+    <footer className=' bg-gray-200  ps-4'>
       <section className='footer-top  flex gap-1  items-center border-y-1 border-gray-400'>
         <div className='flex gap-1 items-center'>
-          <label htmlFor="">Say:</label>
-          <input type="number" className='  bg-yellow-200 w-[50px] h-[20px]' />
           <label htmlFor="">Açar soz:</label>
           <input type="text" className=' bg-white border-1 border-black h-[20px] w-[100px]' />
           <button className='flex gap-1 items-center'>   <FaSearch className=" text-blue-400"  />Axtar</button>

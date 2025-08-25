@@ -7,17 +7,16 @@ import Header from "./Components/Header/page";
 export default function Home() {
 
 
-// const {openSearchModal,isOpenSearchModal}=useModal()
 
   return (
     <div  >
-      <div className="w-[2000px] z-50">       
+      <div className="w-full z-50 fixed ">       
           <Header/>
 </div>
-<div className="z-10"><Table/>
+<div className="z-10 mt-3 "><Table/>
 </div>
 
- <div className=" w-[2000px] fixed bottom-0">        <Footer/>
+ <div className="w-full  fixed bottom-0">        <Footer/>
 </div>
     </div>
   );

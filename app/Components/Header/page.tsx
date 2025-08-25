@@ -34,18 +34,18 @@ const [buildingTypes,setBuildingTypes]=useState<BuildingType[]>([])
 const [propertTypes,setPropertyTypes]=useState<PropertyType[]>([])
 const [metroNames,setMetroNames]=useState<MetroType[]>([])
 const [regionNames,setRegionNames]=useState<RegionType[]>([])
-const [showPanel,setShowPanel]=useState(true)
+// const [showPanel,setShowPanel]=useState(true)
 
 const {openDropDown,isOpenDropDown,toggleDropDown,closeDropDown}= useDropDown()
-  const { isOpenSearchModal,toggleSearchModal } = useAppContext();
+  const { isOpenSearchModal,toggleSearchModal ,showPanel,doubleClick} = useAppContext();
 
 const dropdownRef=useRef<HTMLDivElement>(null)
 const buttonRef = useRef<HTMLButtonElement>(null);
 
 //suretli axtarish paneli ucun
-const doubleClick=()=>{
-setShowPanel((prew)=>!prew)
-}
+// const doubleClick=()=>{
+// setShowPanel((prew)=>!prew)
+// }
 
 
 //dropdown baglanmasi ucun
@@ -122,9 +122,9 @@ useEffect(() => {
 }, [metroNames]);
 
   return (
-    <header className='flex flex-col w-screen min-w-full '>
-
-<section className=' relative'>    <div className='flex p-4'>
+    <header className='flex px-6  flex-col shadow-xl '>
+      <nav className=' py-4 flex justify-between '>
+   
  <button  ref={buttonRef} onClick={ toggleDropDown}  className='flex gap-2 px-2 '>
         <div className='text-center flex flex-col items-center'>
 <FcSearch   size={24}/>
@@ -132,13 +132,13 @@ useEffect(() => {
         </div>
         <div><GoTriangleDown size={22}  color='white' /></div>
       </button>
-      <button onClick={toggleSearchModal} className='flex gap-2 px-2 relative'>
+      <button onClick={toggleSearchModal} className='flex gap-2 px-2 '>
         <div  className='text-center flex flex-col items-center'>
 <FcSearch  size={24} />
 <p>Geniş axtarış</p>
         </div>
       </button>
-      <div  ref={dropdownRef} className= {isOpenDropDown ?  ' bg-white px-4   py-2 absolute top-16': 'hidden'} >
+      <div  ref={dropdownRef} className= {isOpenDropDown ?  '  rounded-md shadow-2xl bg-white z-50 px-4   py-2 absolute top-16': 'hidden'} >
 <ul className=' flex flex-col gap-2  font-bolder  '>
   <li  className='hover-purple'>Standart axtarış</li>
   <li className='border-b-1 border-gray-400 hover-purple '>Surətli axtaris panelini göstər</li>
@@ -158,8 +158,8 @@ useEffect(() => {
 
       </div>
 
-        <button className='flex border-x-1 border-gray-400'>
-        <div  className='text-center flex flex-col items-center px-2'>
+        <button className='flex'>
+        <div  className='text-center flex flex-col items-center '>
 <FaFile className=" text-blue-300" size={24} />
 <p>Baxış</p>
         </div>
@@ -168,7 +168,7 @@ useEffect(() => {
 </div>
       </button>
 
-          <button className='flex  border-gray-400 gap-2 px-2'>
+          <button className='flex  gap-2 '>
         <div  className='text-center flex flex-col items-center '>
 <BiPlusMedical className=" text-blue-300" size={24}/>
 
@@ -177,7 +177,7 @@ useEffect(() => {
         <div>        <div><GoTriangleDown size={22}  color='white' /></div>
 </div>
       </button>
-          <button className='flex border-gray-400'>
+          <button className='flex'>
         <div  className='text-center flex flex-col items-center'>
 <LuFilePenLine  className=" text-blue-300" size={24}/>
 
@@ -186,7 +186,7 @@ useEffect(() => {
         <div>        <div><GoTriangleDown size={22}  color='white' /></div>
 </div>
       </button>
-          <button className='flex border-r border-gray-400'>
+          <button className='flex '>
         <div  className='text-center flex flex-col items-center px-2'>
 <FaMinus className=" text-blue-300" size={24}/>
 
@@ -194,7 +194,6 @@ useEffect(() => {
         </div>
       </button>
 
-<div className='flex border-r border-gray-400 gap-2 px-2'>
       <button className='flex '>
         <div  className='text-center flex flex-col items-center'>
 <IoEarth  className=" text-blue-300" size={24}/>
@@ -225,9 +224,13 @@ useEffect(() => {
         </button>
       </div>
 
-</div>
 
-<div className='flex border-r border-gray-400' >
+
+
+
+
+
+<div className='flex ' >
 
               <button className='flex gap-2 px-2'>
         <div  className='text-center flex flex-col items-center'>
@@ -242,7 +245,7 @@ useEffect(() => {
 
 </div>
 
-<button className='flex border-r border-gray-400' >
+<button className='flex ' >
 
               <div className='flex gap-2 px-2 '>
         <div  className='text-center flex flex-col items-center'>
@@ -259,7 +262,7 @@ useEffect(() => {
 
 </button>
 
-<button className='flex border-r border-gray-400' >
+<button className='flex ' >
 
               <div className='flex  gap-2 px-2'>
         <div  className='text-center flex flex-col items-center'>
@@ -276,7 +279,7 @@ useEffect(() => {
 
 </button>
 
-<button className='flex border-r border-gray-400' >
+<button className='flex ' >
 
               <div className='flex gap-2 px-2 '>
         <div  className='text-center flex flex-col items-center'>
@@ -294,8 +297,10 @@ useEffect(() => {
 </button>
 
 
-        </div>
+        
 
+      </nav>
+<section className=' relative  '> 
         <div  className='flex gap-4'>
           <div  onClick={doubleClick} className=' flex items-center gap-4'> 
           {showPanel ? <GoTriangleDown size={18}  color='white'/>
@@ -304,20 +309,15 @@ useEffect(() => {
           <p className='  cursor-pointer text-blue-400'>{showPanel ? "sürətli axtarış panelini gizlət" :'sürətli axtarış panelini aç' }</p>
 </div>
             <div className=' flex gap-1'>
-
 <p className=' text-purple-500'>axtarışı yenilə</p>
 </div>
-
-
         </div>
         </section>
 
      <section  className={showPanel ? '  visible  flex my-2 px-4' :"hidden "}>  
-
 <div> 
-    <div className=' flex gap-2 mb-6 '>
-
-         <input type="checkbox" 
+    <div className=' flex gap-4 mb-6 '>
+<div className=' flex items-center gap-2'>       <input type="checkbox" 
     name='Satis'
     />
  <label htmlFor="">
@@ -325,21 +325,17 @@ useEffect(() => {
    
 
     Satış
- </label>
-  <input type="checkbox" 
+ </label></div>
+    <div className=' flex items-center gap-2'>
+
+<input type="checkbox" 
     name='kiraye'
     />
   <label htmlFor="">
-
-  
     Kirayə
  </label>
-
-
-
     </div>
-
-
+    </div>
 <div className=' flex items-center gap-2  justify-between my-2 me-2 '>
     <div className=' flex items-center gap-2'> <input  type="checkbox" />  <label htmlFor="">  Qiymət
 </label></div>
@@ -348,62 +344,72 @@ useEffect(() => {
 
 
 
-<div className='flex  '><input type="number" placeholder='0' className='w-[60px] bg-white' />
-        <div><select name="" id=""></select></div></div>
+<div className='flex  '><input type="number" placeholder='0' className='w-[80px] bg-white' />
+</div>
 <div className='px-2'> <p>-</p></div>
         
-
-
-
-
-<div className=' flex '> <input type="number" placeholder='10000000' className='w-[60px] bg-white' />
-        <div><select name="" id=""></select></div></div>
+<div className=' flex '> <input type="number" placeholder='10000000' className='w-[80px] bg-white' />
+        </div>
 
 </div>
 
-<div className=' flex   gap-3 items-center'>
-    <input type="checkbox" /> <label htmlFor="">    Sahə
-</label>
-
-<div className=' flex gap-2'>
-    
-     <div className='flex '><input type="number" placeholder='0' className='w-[60px] bg-white' />
-        <div><select name="" id=""></select></div></div>
-
+<div className=' flex items-center gap-2 justify-between my-2 me-2 '>
+    <div className=' flex items-center gap-4'> <input  type="checkbox" /> 
+     <label htmlFor="">  Sahə
+</label></div>
+  
+<div className='flex  '>
+  <input type="number" placeholder='0' className='w-[80px] bg-white' /> 
+   </div>
 <div className='px-2'> <p>-</p></div>
-<div className=' flex  me-2 '>
-    <input type="number" placeholder='500' className='w-[60px] bg-white' />
-        <div><select name="" id=""></select></div></div></div>
+<div className=' flex '> <input type="number" placeholder='10000000' className='w-[80px] bg-white' />
+        </div>
 
-
+</div>
+</div>
+<div className='max-h-[140px] flex   flex-col  justify-between px-4 ms-4  overflow-y-auto scroll-container rounded-md shadow-md shadow-gray-500   w-[200px] bg-white'>
+<div className='  bg-white flex justify-between fixed w-[160px] py-2'> 
+      <p className=' font-bold'>Yeni tikili</p>
+        <p className=' font-bold'>Kohnə tikili</p>
+</div>
+ <div className=' flex justify-between mt-8 '>
+  <ul className='flex flex-col gap-1'>
+    <li className='hover-purple'>1 otaqlı</li>
+    <li className='hover-purple'> 2 otaqlı</li>
+    <li className='hover-purple'> 3 otaqlı</li>
+    <li className='hover-purple'> 4 otaqlı</li>
+    <li className='hover-purple'>5 otaqlı</li>
+    <li className='hover-purple'>6 otaqlı</li>
+    <li className='hover-purple'> 7 otaqlı</li>
+    <li className='hover-purple'> 8 otaqlı</li>
+    <li className='hover-purple'>9 otaqlı</li>
+    <li className='hover-purple'>10 otaqlı</li>
+  </ul>
+    <ul className='flex flex-col gap-1'>
+    <li className='hover-purple'>1 otaqlı</li>
+    <li className='hover-purple'> 2 otaqlı</li>
+    <li className='hover-purple'> 3 otaqlı</li>
+    <li className='hover-purple'> 4 otaqlı</li>
+    <li className='hover-purple'>5 otaqlı</li>
+    <li className='hover-purple'>6 otaqlı</li>
+    <li className='hover-purple'> 7 otaqlı</li>
+    <li className='hover-purple'> 8 otaqlı</li>
+    <li className='hover-purple'>9 otaqlı</li>
+    <li className='hover-purple'>10 otaqlı</li>
+  </ul>
+ </div>
 </div>
 
 
+
+
+
+<div className=' rounded-md shadow-md  px-4  shadow-gray-500 ms-4  bg-white max-h-[140px] w-[200px] scroll-container overflow-y-auto '>
+    
+<div className=' fixed bg-white w-[160px] pt-2   '> 
+  <p className=' font-bold'>Əmlak növü</p>
 </div>
-
-
-<div className=' flex gap-6 px-2 bg-white  w-[200px] max-h-[140px] scroll-container overflow-y-auto'>
- {buildingTypes.map((type) => (
-    <div   key={`${type.buildingTypeName}-${type.idBuildingType}`}>
-      <h1 className=' font-bold'>{type.buildingTypeName}</h1>
-      <ul className=''>
-        {roomCounts.map((room) => (
-          <li  className='hover-purple mt-1'      key={`${type.buildingTypeName}-${type.idBuildingType}-${room.roomCountName}-${room.idRoomCount}`}>{room.roomCountName}</li>
-        ))}
-      </ul>
-    </div>
-  ))}
-
-
-</div>
-
-
-
-
-
-<div className='px-4 ms-4 bg-white max-h-[140px] w-[200px] scroll-container overflow-y-auto '>
-    <ul className=''>
-        <p className=' font-bold'>Əmlak növü</p>
+<ul className='pt-8'>
         {propertTypes.map((prop)=>(
         <li className='hover-purple mt-1' key={prop.idPropertyType}>
                 {prop.propertyTypeName}
@@ -414,10 +420,12 @@ useEffect(() => {
     </ul>
 </div>
 
-<div className='px-4 max-h-[140px]  ms-4  overflow-y-auto scroll-container bg-white'>
-    <div className='flex mb-1 gap-1 it'> <label className=' font-bold' htmlFor="">Metrolar:</label>
-    <input type="text" className=' bg-white' /></div>
-    <div className=' flex flex-col  '>
+<div className='max-h-[140px] px-4 ms-4  overflow-y-auto scroll-container rounded-md shadow-md shadow-gray-500   w-[200px] bg-white'>
+    <div className='flex items-center  mb-1 pt-2  fixed bg-white'>
+       <label className=' font-bold' htmlFor="">Metrolar:</label>
+    <input type="text" className=' bg-white w-[120px]' />
+    </div>
+    <div className=' flex flex-col pt-8  '>
         {metroNames.map((metro)=>(
                  <div className='flex gap-1 items-center hover-purple' key={`${metro.metroName}-${metro.id}`}> <input id={metro.id?.toString()}  type="checkbox" />
         <label htmlFor="">{metro.metroName}</label></div>
@@ -428,10 +436,12 @@ useEffect(() => {
 </div>
 
 
-<div className='bg-white px-4 ms-4 max-h-[140px] scroll-container overflow-y-auto '>
-    <div className='flex mb-1 gap-1'> <label className=' font-bold' htmlFor="">Rayonlar:</label>
-    <input type="text"  className='bg-white '/></div>
-    <div className=' flex flex-col '>
+<div className='max-h-[140px] px-4 ms-4  overflow-y-auto scroll-container rounded-md shadow-md shadow-gray-500   w-[250px] bg-white'>
+   <div className='flex items-center   mb-1 pt-2  fixed w-[220px] bg-white'>
+       <label className=' font-bold' htmlFor="">Rayonlar:</label>
+    <input type="text" className=' bg-white w-[180px]' />
+    </div>
+    <div className=' flex flex-col pt-8  '>
         {regionNames.map((region)=>(
 
    <div    key={`${region.regionName}-${region.idRegion}`} className='flex gap-1 items-center hover-purple'> <input id={region.idRegion?.toString()}  type="checkbox" />
